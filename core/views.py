@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
-from core.models import GeneralSetting
+from core.models import GeneralSetting, Experience, Skill, SocialMedia, Language, Education, Activity
 
 
 # Create your views here.
@@ -12,7 +12,14 @@ def index(request):
     email = GeneralSetting.objects.get(name='email').parameter
     currentCity = GeneralSetting.objects.get(name='currentCity').parameter
     
-
+    experiences = Experience.objects.all()
+    
+    skills = Skill.objects.all()
+    
+    socialMedia = SocialMedia.objects.all()
+    languages = Language.objects.all()
+    educations = Education.objects.all()
+    activities = Activity.objects.all()
 
     context = {
         'title': title,
@@ -21,6 +28,12 @@ def index(request):
         'birthDate': birthDate,
         'email': email,
         'currentCity': currentCity,
+        'experiences': experiences,
+        'skills': skills,
+        'socialMedia': socialMedia,
+        'language': languages,
+        'educations': educations,
+        'activities': activities,
     }
     return render(request, 'index.html', context=context)
 
